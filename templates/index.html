@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Streaming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .stream-container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            border-radius: 10px;
+        }
+        .predictions {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Live Streaming</h1>
+    <div class="stream-container">
+        <img id="video-stream" src="{{ url_for('video') }}" width="100%" alt="Live Stream"/>
+        <div id="predictions" class="predictions"></div>
+    </div>
+
+    <script>
+        const videoStream = document.getElementById('video-stream');
+        const predictionsDiv = document.getElementById('predictions');
+
+        async function fetchPredictions() {
+            const response = await fetch('/video');
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+
+            let frameBuffer = [];
+            let predictionBuffer = [];
+            let inFrame = false;
+            let inPrediction = false;
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+
+                const text = decoder.decode(value);
+                const lines = text.split('\r\n');
+                
+                for (const line of lines) {
+                    if (line.startsWith('--frame')) {
+                        inFrame = true;
+                        inPrediction = false;
+                    } else if (line.startsWith('--predictions')) {
+                        inFrame = false;
+                        inPrediction = true;
+                    } else if (inFrame) {
+                        frameBuffer.push(line);
+                    } else if (inPrediction) {
+                        predictionBuffer.push(line);
+                    }
+                }
+
+                if (frameBuffer.length > 0 && predictionBuffer.length > 0) {
+                    const frame = frameBuffer.join('');
+                    const prediction = predictionBuffer.join('');
+
+                    frameBuffer = [];
+                    predictionBuffer = [];
+
+                    // Update the image source and prediction text
+                    videoStream.src = 'data:image/jpeg;base64,' + btoa(frame);
+                    predictionsDiv.textContent = prediction;
+                }
+            }
+        }
+
+        fetchPredictions();
+    </script>
+</body>
+
+</html>
