@@ -18,6 +18,8 @@ This project was developed to help maintain the integrity of online exams for ch
 
 https://github.com/user-attachments/assets/87760e47-d582-4184-a572-9a56db69aedc
 
+https://github.com/user-attachments/assets/690e005f-dcc0-482a-9049-ef0c5439335c
+
 ## Dataset
 
 The dataset contains 600 pictures of children's faces. These images were used to fine-tune the pre-trained MobileNet model for better accuracy in detecting children's faces and their attention.
