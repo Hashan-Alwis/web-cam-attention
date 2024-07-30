@@ -27,11 +27,11 @@ The dataset contains 600 pictures of children's faces. These images were used to
 data set password hit - "my guitar brand name & model number"
 
 ### a few samples
+![20240219_104227](https://github.com/user-attachments/assets/35bc3b32-c975-4615-941c-761bb004e2bd)
+![20240219_104336](https://github.com/user-attachments/assets/10d3457d-deb7-4e93-b796-133672bf2d7d)
+![20240219_113841](https://github.com/user-attachments/assets/e76a6b50-c3e9-4b0a-96f0-d6b199e6dbdb)
+![WIN_20240220_09_22_38_Pro](https://github.com/user-attachments/assets/60d99659-a73c-41f3-beda-2f8f5f2f967d)
 
-![20240219_104227](https://github.com/user-attachments/assets/212cd397-b837-4951-ae2f-4bf6cd4136a2)
-![20240219_104336](https://github.com/user-attachments/assets/778b6715-c19d-499c-97a3-ae0dfccf9c5b)
-![20240219_113841](https://github.com/user-attachments/assets/d63184bf-d571-4539-94bc-357b6cc10ea4)
-![WIN_20240220_09_22_38_Pro](https://github.com/user-attachments/assets/4ff7631d-6ced-4ed4-a7a5-4c68242b5fb6)
 
 
 ## Model and Training
